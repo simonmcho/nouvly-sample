@@ -91,10 +91,6 @@ router.post('/login', (req, res) => {
         bcrypt.compare(password, user.password)
             .then(isMatch => {
                 if (isMatch) { // If entered password matches password in DB, enter here. We get token back here
-                    // res.json({
-                    //     msg: 'SUCCESS!!'
-                    // })
-                    // User matched
                     const payload = { // Create jwt payload
                         id: user.id,
                         name: user.name,
