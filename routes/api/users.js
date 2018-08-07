@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs'); // hashing password
+const jwt = require('jsonwebtoken'); //for JWT
+const keys = require('../../config/keys');
 
 // Load User model
 const User = require('../../models/User.js');
@@ -65,6 +67,57 @@ router.post('/register', (req, res) => {
             });
         }
     });
+});
+
+/****************************** 
+* @route GET api/users/login
+* @desc Login user (return JWT, the JSON Web Token)
+* @access Public
+*******************************/
+router.post('/login', (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    // Find the user by email
+    User.findOne({
+        email
+    }).then(user => {
+        // Check for user - if there is no user, user returns false
+        if (!user) return res.status(404).json({
+            email: 'User not found!'
+        }); // Not found!
+
+        // Check passsword
+        bcrypt.compare(password, user.password)
+            .then(isMatch => {
+                if (isMatch) { // If entered password matches password in DB, enter here. We get token back here
+                    // res.json({
+                    //     msg: 'SUCCESS!!'
+                    // })
+                    // User matched
+                    const payload = { // Create jwt payload
+                        id: user.id,
+                        name: user.name,
+                        avatar: user.avatar
+                    } 
+                    jwt.sign(
+                        payload, // The created payload
+                        keys.secretOrKey, // In our config file
+                        { expiresIn: 3600 }, // Key is thrown out after an hour
+                        (err, token) => {
+                            res.json({
+                                success: true,
+                                token: 'Bearer ' + token
+                            });
+                    }); 
+                } else { // If entered password does not match password in DB, enter here
+                    return res.status(400).json({
+                        password: 'Password incorrect!'
+                    });
+                }
+            })
+    })
+
 });
 
 
