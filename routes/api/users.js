@@ -4,6 +4,7 @@ const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs'); // hashing password
 const jwt = require('jsonwebtoken'); //for JWT
 const keys = require('../../config/keys');
+const passport = require('passport'); // Needed to create protected route
 
 // Load User model
 const User = require('../../models/User.js');
@@ -114,6 +115,19 @@ router.post('/login', (req, res) => {
             })
     })
 
+});
+
+/****************************** 
+* @route GET api/users/current
+* @desc Return current user
+* @access Private
+*******************************/
+router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => { // jwt is the strategy 
+    // res.json({
+    //     msg: 'Success!!!!!'
+    // })
+    // Once authenticated via passport using our config, the user object is in the request
+    res.json(req.user);
 });
 
 

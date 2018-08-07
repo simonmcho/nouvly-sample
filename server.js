@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const passport = require('passport'); // Main authentication module. Submodules like jwt and google oAuth exist under this
 
 const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
@@ -22,13 +23,13 @@ const mongoConnectFail = err => console.log(err);
 mongoose
     .connect(db)
     .then(mongoConnectTester())
-    .catch(mongoConnectFail())
+    .catch(mongoConnectFail());
 
-app.get('/', (req, res) => {
+// Passport middleware
+app.use(passport.initialize());
 
-    res.send('Hello world!!!!!????')
-
-});
+// Passport Config
+require('./config/passport.js')(passport);
 
 // Use Routes
 app.use('/api/users', users);
