@@ -5,8 +5,10 @@
 - Open postman for development testing
 - Login to mlab to see database
 
-Aug 6, 2018
-## User login, authorization, and validation
+Continue here: [Udemy](https://www.udemy.com/mern-stack-front-to-back/learn/v4/t/lecture/10055158?start=0)    
+
+## Aug 6, 2018
+### User login, authorization, and validation
 Prerequisites:
 - Passport
 - [Gravatar](https://github.com/emerleite/node-gravatar)
@@ -35,4 +37,9 @@ Prerequisites:
 - So instead of console logging, we can use `User.findById()` which is a method from `mongoose` and pass in `jwt_payload.id`
 - Once promise is resolved, we return the `done` function. If user has been found in db, return user by passing it in as 2nd param in the `done` function. If not found, we return `false` as 2nd param.
 - By doing the above, the `user` object now exists in the `request` object in our callback for the `api/users/current` route. We pass that as json via `req.json(req.user)`. 
-Continue here: [Udemy](https://www.udemy.com/mern-stack-front-to-back/learn/v4/t/lecture/10055158?start=0)
+
+## Aug 7, 2018
+### User Register Validation
+- Revisited Aug 6 jwt. Still need to understand how `config/passport.js` gets executed when requesting `/api/users/current`
+- Using `validation` module to validate user name, email, password, and password confirm upon registration.
+- Check `/validation/register.js` for details

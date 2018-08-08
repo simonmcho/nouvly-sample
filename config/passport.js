@@ -13,6 +13,7 @@ options.secretOrKey = keys.secretOrKey;
 
 module.exports = passport => {
     passport.use(new JwtStrategy(options, (jwt_payload, done) => {
+        // console.log("HI!!!!!!!!!!!!!!!!!!");
         // console.log(jwt_payload);
         // Get user being sent in the token
         User.findById(jwt_payload.id) // jwt_payload is an object that has the user id in it (remember console logging this)

@@ -6,6 +6,9 @@ const jwt = require('jsonwebtoken'); //for JWT
 const keys = require('../../config/keys');
 const passport = require('passport'); // Needed to create protected route
 
+// Load Input Validation
+const validateRegisterInput = require('../../validation/register.js');
+
 // Load User model
 const User = require('../../models/User.js');
 
@@ -26,14 +29,23 @@ router.get('/test', (req, res) => {
 * @access Public
 *******************************/
 router.post('/register', (req, res) => {
+    // Here, req.body has whatever we said body has in postman when making a post request to /register
+    // console.log("SEE BELOW FOR BODY INFO!!!!")
+    // console.log(req.body);
+    // console.log("SEE ABOVE FOR BODY INFO!!!!")
+    const { errors, isValid } = validateRegisterInput(req.body); // Variables are the return values of register.js
+
+    // Check Validation
+    if (!isValid) { // If it's not valid, it means the errors object has something in it
+        return res.status(400).json(errors);
+    }
     // Check if email exists
     User.findOne({
         email: req.body.email
     }).then( user => { // If user exists, we want to send status 400
+        errors.email = "Email already exists!"; // Add key value pair to errors object from validation/register.js
         if (user) {
-            res.status(400).json({
-                email: 'Email already exists!'
-            }) ;
+            res.status(400).json(errors) ;
         } else {
             // Gravatar email
             const avatar = gravatar.url( // If there is an avatar, it'll be initialized to this variable, if not, it's this default
@@ -76,21 +88,21 @@ router.post('/register', (req, res) => {
 * @access Public
 *******************************/
 router.post('/login', (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
+    const email = req.body.email; // the user's entries
+    const password = req.body.password; // the user's entries
 
     // Find the user by email
-    User.findOne({
-        email
-    }).then(user => {
+    User.findOne({ // mongoose method
+        email // find email: email
+    }).then(user => { // if found...
         // Check for user - if there is no user, user returns false
         if (!user) return res.status(404).json({
             email: 'User not found!'
         }); // Not found!
 
         // Check passsword
-        bcrypt.compare(password, user.password)
-            .then(isMatch => {
+        bcrypt.compare(password, user.password) // compare user entered password vs actual password in db (hashed)
+            .then(isMatch => { // After comparing, returns isMatch
                 if (isMatch) { // If entered password matches password in DB, enter here. We get token back here
                     const payload = { // Create jwt payload
                         id: user.id,
@@ -99,7 +111,7 @@ router.post('/login', (req, res) => {
                     } 
                     jwt.sign(
                         payload, // The created payload
-                        keys.secretOrKey, // In our config file
+                        keys.secretOrKey, // In our config file...still not sure what secretOrKey is
                         { expiresIn: 3600 }, // Key is thrown out after an hour
                         (err, token) => {
                             res.json({
@@ -123,11 +135,12 @@ router.post('/login', (req, res) => {
 * @access Private
 *******************************/
 router.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => { // jwt is the strategy 
-    // res.json({
-    //     msg: 'Success!!!!!'
-    // })
     // Once authenticated via passport using our config, the user object is in the request
-    res.json(req.user);
+    res.json({
+        id: req.user.id,
+        name: req.user.name,
+        email: req.user.email
+    });
 });
 
 
