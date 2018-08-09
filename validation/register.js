@@ -2,6 +2,7 @@ const Validator = require('validator');
 const isEmpty = require('./is-empty');
 
 module.exports = function validateRegisterInput(data) {
+    
     let errors = {};
     const thresholdForName = { min: 2, max: 30 };
     const thresholdForPassword = { min: 6, max: 30 };
@@ -12,7 +13,6 @@ module.exports = function validateRegisterInput(data) {
     data.password = !isEmpty(data.password) ? data.password : '';
     data.passwordConfirm = !isEmpty(data.passwordConfirm) ? data.passwordConfirm : '';
 
-    console.log(data);
     // If validator requirements don't match, create a key in errors called name with a value
     if (Validator.isEmpty(data.name)) {
         errors.name = 'Name field is required!';

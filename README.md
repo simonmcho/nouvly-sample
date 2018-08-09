@@ -43,3 +43,8 @@ Prerequisites:
 - Revisited Aug 6 jwt. Still need to understand how `config/passport.js` gets executed when requesting `/api/users/current`
 - Using `validation` module to validate user name, email, password, and password confirm upon registration.
 - Check `/validation/register.js` for details
+
+## Aug 8, 2018
+### User Register Validation 2
+- Using `validation` module to validate user email and password upon login
+- In `users.js`, checked for the object being returned from validation js files to see if there are any errors, then returning a `res.status` with the `errors` object

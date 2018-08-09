@@ -8,6 +8,7 @@ const passport = require('passport'); // Needed to create protected route
 
 // Load Input Validation
 const validateRegisterInput = require('../../validation/register.js');
+const validateLoginInput = require('../../validation/login.js');
 
 // Load User model
 const User = require('../../models/User.js');
@@ -88,6 +89,10 @@ router.post('/register', (req, res) => {
 * @access Public
 *******************************/
 router.post('/login', (req, res) => {
+    const { errors, isValid } = validateLoginInput(req.body);
+
+    if (!isValid) return res.status(400).json(errors); // Return 400 status if errors is not empty
+
     const email = req.body.email; // the user's entries
     const password = req.body.password; // the user's entries
 
@@ -96,9 +101,13 @@ router.post('/login', (req, res) => {
         email // find email: email
     }).then(user => { // if found...
         // Check for user - if there is no user, user returns false
-        if (!user) return res.status(404).json({
-            email: 'User not found!'
-        }); // Not found!
+        // if (!user) {
+        //     errors.email = 'Email not found...';
+        //     return res.status(404).json(errors); // Not found!
+        // }
+        if (typeof errors.email !== 'undefined') return res.status(404).json(errors); // No email entered?
+
+        if (typeof errors.password !== 'undefined') return res.status(404).json(errors); // No password entered?
 
         // Check passsword
         bcrypt.compare(password, user.password) // compare user entered password vs actual password in db (hashed)
@@ -120,9 +129,8 @@ router.post('/login', (req, res) => {
                             });
                     }); 
                 } else { // If entered password does not match password in DB, enter here
-                    return res.status(400).json({
-                        password: 'Password incorrect!'
-                    });
+                    errors.password = 'Password incorrect!';
+                    return res.status(400).json(errors);
                 }
             })
     })
