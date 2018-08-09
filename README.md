@@ -1,4 +1,4 @@
-** This is NOUVLY, a web application created by simmonson
+* This is NOUVLY, a web application created by simmonson
 # How to get started
 - Run `npm install` to install dependencies
 - Run `yarn server` in terminal
@@ -48,3 +48,13 @@ Prerequisites:
 ### User Register Validation 2
 - Using `validation` module to validate user email and password upon login
 - In `users.js`, checked for the object being returned from validation js files to see if there are any errors, then returning a `res.status` with the `errors` object
+
+## Aug 8, 2018 B
+### User Profile Creation
+- Created another model called `Profile.js`, using `mongoose.schema` class.
+- In `/routes/api/profile.js`, created a route for `/api/profile` that checks for profile. Upon initial register and login, trying to access this route will return an error of no profile since the user would not have created one yet
+- Created a post request route for `/api/profile`. Here we create a `profileFields` object and store the data from the request accordingly.
+- After the `profileFields` object has all the data, we look for the profile using `req.user.id`. 
+- If profile exists, then we call `findAndUpdate` method from `mongoose.model()`. If it doesn't we call `findOne`.  By doing the latter, we search the db for the handle. If the user's handle exists already, we return an error
+- If the user's handle doesn't exist, we are able to create a new `Profile` model, save the info to the db, then return the json with the created profile.
+#### TO DO: Re-do this for confirm learning!!!
