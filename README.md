@@ -38,6 +38,11 @@ Prerequisites:
 - Once promise is resolved, we return the `done` function. If user has been found in db, return user by passing it in as 2nd param in the `done` function. If not found, we return `false` as 2nd param.
 - By doing the above, the `user` object now exists in the `request` object in our callback for the `api/users/current` route. We pass that as json via `req.json(req.user)`. 
 
+#### What is JWT? - JSON Web Token
+- Once user is verified, they will get back a token using the `JWT` module
+- The token is then sent by the user to access a protected route for validation (using `passport` and `passportjwt`)
+- It will then allow the extraction of user info
+
 ## Aug 7, 2018
 ### User Register Validation
 - Revisited Aug 6 jwt. Still need to understand how `config/passport.js` gets executed when requesting `/api/users/current`
