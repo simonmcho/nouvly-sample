@@ -46,7 +46,7 @@ Prerequisites:
 ## Aug 7, 2018
 ### User Register Validation
 - Revisited Aug 6 jwt. Still need to understand how `config/passport.js` gets executed when requesting `/api/users/current`
-- Using `validation` module to validate user name, email, password, and password confirm upon registration.
+- Using server side validation, `validation` module to validate user name, email, password, and password confirm upon registration.
 - Check `/validation/register.js` for details
 
 ## Aug 8, 2018
@@ -63,3 +63,7 @@ Prerequisites:
 - If profile exists, then we call `findAndUpdate` method from `mongoose.model()`. If it doesn't we call `findOne`.  By doing the latter, we search the db for the handle. If the user's handle exists already, we return an error
 - If the user's handle doesn't exist, we are able to create a new `Profile` model, save the info to the db, then return the json with the created profile.
 #### TO DO: Re-do this for confirm learning!!!
+
+## Aug 23, 2018
+### Re-confirm learning: 
+- Redoing authorization and server side validation. 
