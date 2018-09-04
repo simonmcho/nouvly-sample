@@ -8,6 +8,7 @@ const passport = require('passport');
 
 // Load Input Validation
 const validateRegisterInput = require('../../validation/register');
+const validateLoginInput = require('../../validation/login');
 
 // LOAD USER MODEL
 const User = require('../../models/User');
@@ -77,20 +78,29 @@ router.post('/register', (req, res) => {
 * @access   Public
 */
 router.post('/login', (req, res) => {
+    const { errors, isValid } = validateLoginInput(req.body);
     const email = req.body.email;
     const password = req.body.password;
+
+    if (!isValid) {
+        return res.status(400).json(errors);
+    }
 
     // Find user via email
     User
         .findOne({ email })
         .then(user => {
-            if (!user) return res.status(404).json({ email: 'User email not found!' }); // If user not found, send json 
+
+            if (!user) {
+                errors.email = "User entered email, but entered email not found!";
+                return res.status(404).json(errors);
+            }
 
             // If user is found, check password. Remember, the user's password input is text, the password in db is hashed. So we need to use bcrypt to compare
             bcrypt.compare(password, user.password) // Compare user password vs database password
                 .then(isMatch => {
                     if (isMatch) { // If passwords matched, generate JWT Token
-                        // res.json({ msg: 'Success' });
+                        
                         const payload = { // Create jwt payload
                             id: user.id,
                             name: user.name,
@@ -106,7 +116,10 @@ router.post('/login', (req, res) => {
                                 token: `Bearer ${token}`
                             })
                         });
-                    } else return res.status(400).json({ success: false, password: 'Password incorrect!' }); // Password incorrect logic
+                    } else {
+                        errors.password = 'Password entered but incorrect!';
+                        return res.status(400).json(errors); // Password incorrect logic
+                    }
                 })
         })
 });
