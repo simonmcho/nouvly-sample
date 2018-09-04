@@ -67,3 +67,8 @@ Prerequisites:
 ## Aug 23, 2018
 ### Re-confirm learning: 
 - Redoing authorization and server side validation. 
+
+## Sep 4, 2018
+- Created a Schema for Profiles
+- Created another validation code file for profile checking
+- Added routes for user profile creation, edit, getting user profile by handle, id, and all profiles
