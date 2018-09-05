@@ -77,4 +77,17 @@ Prerequisites:
 - Created Validation for Education and experience
 - Udated profile routes for education and experience
     • Can now create, edit, and delete education and experience    
+- At this point, do the following in the backend:
+1. Register a user: `/api/users/register/`
+2. Login with a registered user: `/api/users/login/`
+3. See logged in user: `/api/users/current`
+4. Create profile: `/api/profile/`
+5. See logged in user's profile: `/api/profile/`
+6. See public profiles via handle or id: `/api/profile/handle/:handle_id`, `/api/profile/user/:user_id`
+7. See all public profiles: `/api/profile/all`
+8. See public profile's experience: `/api/profile/experience`
+9. See public profile's education: `/api/profile/education`
+10. Delete your own profile: `/api/profile/`. You can also delete the user at the same time, but this code is commented out in `/routes/api/profile.js`.
+
+The required fields for `GET`, `POST`, and `DELETE` methods are by design not in the README, so that you can check validation and the error states during QA/staging. 
     
