@@ -72,3 +72,9 @@ Prerequisites:
 - Created a Schema for Profiles
 - Created another validation code file for profile checking
 - Added routes for user profile creation, edit, getting user profile by handle, id, and all profiles
+
+## Sep 4, 2018 B
+- Created Validation for Education and experience
+- Udated profile routes for education and experience
+    • Can now create, edit, and delete education and experience    
+    
