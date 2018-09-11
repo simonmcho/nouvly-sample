@@ -79,13 +79,21 @@ Prerequisites:
     • Can now create, edit, and delete education and experience    
 - At this point, do the following in the backend:
 1. Register a user: `/api/users/register/`
+- Private Route, `Post` request: Goes through validation for `name`, `email`, `password`, and `passwordConfirm`
 2. Login with a registered user: `/api/users/login/`
+- Private Route, `Post` request: Goes through validation for `email` and matching `password`. 
 3. See logged in user: `/api/users/current`
+- Private Route, `Get` request: Requires the correct token in order to view the current user.
 4. Create profile: `/api/profile/`
+- Private Route, `Post` request: It needs the logged in user's token to see this private route. Goes through validation for `handle`, `status`, and `skills`
 5. See logged in user's profile: `/api/profile/`
+- Private Route, `Get` request: It needs the logged in user's token to see this private route. Displays profile information.
 6. See public profiles via handle or id: `/api/profile/handle/:handle_id`, `/api/profile/user/:user_id`
+- Public Route, `Get` request: Displays public information about someone's profile via handle (eg. `http://localhost:5000/api/profile/handle/sandrayoo`) or ID ( (eg. `http://localhost:5000/api/profile/user/${user._id}`))
 7. See all public profiles: `/api/profile/all`
+- Public Route, `Get` request
 8. See public profile's experience: `/api/profile/experience`
+CONTINUE DOCUMENTATION HERE!
 9. See public profile's education: `/api/profile/education`
 10. Delete your own profile: `/api/profile/`. You can also delete the user at the same time, but this code is commented out in `/routes/api/profile.js`.
 
