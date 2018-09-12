@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
 
-const post = require('../../models/Post'); // Post model
+const Post = require('../../models/Post'); // Post model
 const validatePostInput = require('../../validation/post'); // Validation
 
 
@@ -24,13 +24,16 @@ router.get('/test', (req, res) => {
 router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
     const { errors, isValid } = validatePostInput(req.body);
 
-    // Check validation
-    if (!isValid) {
-        // If any errors, send 400 with errors object
-        return res.status(400).json(errors);
-    }
+    if (!isValid) return res.status(400).json(errors); // If any validation errors, send 400 with errors object
 
-    const newPost = new post({
+    const userID = { user: req.user.id };
+    Post.findOne(userId)
+        .then(profile => {
+            Post.findById(req.params.id)
+                .then() // need to check posts, if exists, update, if not, create
+        })
+
+    const newPost = new Post({
         text: req.body.text,
         name: req.body.name,
         avatar: req.body.avatar,
@@ -61,7 +64,32 @@ router.get('/:id', (req, res) => {
     Post.findById(req.params.id) // Get a single post via id
         .then(post => res.json(post))
         .catch(() => res.status(404).json({ nopostfound: "posts router says: No post found with that ID!"}));
-})
+});
+
+/* 
+* @route    DELETE api/posts
+* @desc     Delete post
+* @access   Private
+*/
+router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    const userID = { user: req.user.id };
+    Profile.findOne(userID) // Find user by id
+        .then(profile => {
+            
+            Post.findById(req.params.id) // Now that we got the correct user profile, we find the post by id
+                .then(post => {
+                    
+                    if (post.user.toString() !== req.user.id) { // Check that the user deleting the post is their own
+                        return res.status(401).json({ notauthorized: 'posts router says: User is not authorized!' }); // 401 is an unauthorized status
+                    }
+
+                    // Delete post
+                    post.remove().then(() => res.json({ success: true }));
+                })
+                .catch(err => res.status(404).json({ postnotfound: 'posts router says: Post not found!'}))
+        })
+        .catch(() => res.status(404).json({ usernotfound: 'posts router says: User not found!'}));
+});
 
 
 module.exports = router;
