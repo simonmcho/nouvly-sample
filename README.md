@@ -99,3 +99,6 @@ CONTINUE DOCUMENTATION HERE!
 
 The required fields for `GET`, `POST`, and `DELETE` methods are by design not in the README, so that you can check validation and the error states during QA/staging. 
     
+## Sep 11, 2018
+1. Model for posts. Create, Read, Delete posts. Update can be worked on alone
+2. Using `Post` model with `posts` route, with validation
