@@ -102,3 +102,8 @@ The required fields for `GET`, `POST`, and `DELETE` methods are by design not in
 ## Sep 11, 2018
 1. Model for posts. Create, Read, Delete posts. Update can be worked on alone
 2. Using `Post` model with `posts` route, with validation
+
+## Sep 17, 2018
+1. Router definitions for likes and comments.
+2. Ability to like and unlike a post
+3. Ability to comment on and delete a comment on a post
