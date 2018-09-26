@@ -139,4 +139,4 @@ The required fields for `GET`, `POST`, and `DELETE` methods are by design not in
 1. Creating new route and component for Register
 2. Created routes for `register` and `login`. Classes so they should be uppercased.
 3. Used `Link` component from `react-router-dom` to link based on relative directories, instead of `a` tags and `href` attributes
-
+4. Using class component `Register.js` to deal with registration. Simple review of functions within class components
