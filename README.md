@@ -126,4 +126,15 @@ The required fields for `GET`, `POST`, and `DELETE` methods are by design not in
   },
 ```
 - Notice how `concurrently` allows us to run multiple terminal cmds at once
-4. 
+4. To check if it's running correctly, you should see `localhost:3000` running on the browser, and typing in `http://localhost:5000/api/profile/all` should show whatever profile content is existing on the database
+5.  Added bootstrap theme in the front end as well as font-awesome CDN (`index.html` in the front end)
+
+## Sep 25, 2018B
+1. Installed VS Code extension `ES7 React/Redux/React-Native/JS`
+2. Created Components for `Navbar`, `Landing`, and `Footer`, added markup
+3. Installed `react-router-dom` (version 4 of `react-router`) in `client` directory
+3. Created `Router` component and `route` in `App.js`, and pointed towards `Landing` as exact route.
+
+## Sep 25, 2018C
+1. Creating new route and component for Register
+
