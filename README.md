@@ -107,3 +107,23 @@ The required fields for `GET`, `POST`, and `DELETE` methods are by design not in
 1. Router definitions for likes and comments.
 2. Ability to like and unlike a post
 3. Ability to comment on and delete a comment on a post
+
+## Sep 25, 2018
+1. Created front-end using `create-react-app` cli, directory is called `client`
+2. Create proxy in `package.json` in client. We do this because we want to hit our routes via relationship, not direct http call/ajax
+- EG: `  "proxy": "http://localhost:5000"` added in `client`'s `package.json`
+3. Now we have to open up 2 terminals, one for the front end and one for the back end. We don't want this
+- So we can use `concurrently` which allows us to run multiple commands at once by modifying the backend's `package.json` file
+- We installed concurrently: `yarn add concurrently`
+- Updated backend's `package.json` like the following:
+```
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+```
+- Notice how `concurrently` allows us to run multiple terminal cmds at once
+4. 
