@@ -190,4 +190,33 @@ render() {
 - For the form, we don't want the default error states, so we added `noValidate` as an attribute in the form:
 `<form noValidate onSubmit={this.onSubmit}>`
 
+## Sep 26, 2018B
+1. Redux
+- Think of states as also being in scopes
+- So you need an application level state
+- This allows a single source of truth that can dispatch data down to components
+2. For this application, we'll have an auth state, profile state, post state, errors state, etc
+3. Ran `yarn add redux react-redux redux-thunk`
+- `redux-thunk` is a middleware for ajax request. Allows us to wait for the request and then dispatch to our `reducer`
+4. `import { Provider } from 'react-redux';` in `App.js`. Provides our application with a store. The provider must wrap around everything like so: `<Provider store={store}>`
+5. Created separate `reducer` folder and `store` files. 
+- The `store.js` file allows us to organize the store and the middleware like so:
+```
+import { createStore, applyMiddleware } from 'redux'; 
+import thunk from 'redux-thunk';
+import rootReducer from './reducers';
+
+const middleware = [thunk]; // Add more middleware as you wish
+
+const store = createStore(() => [], {}, applyMiddleware(...middleware)); // spread operator allows us to bring any middleware in the variable declartion
+
+export default store;
+```
+- The `reducer/index.js` file uses `combineReducers` from `redux` to combine all reducers that can then be accessible via `this.props`:
+```
+export default combineReducers({
+    auth: authReducer // when we use anything from authReducer in our components, we can use this.props.auth
+});
+```
+- Also set up `authReducer` reducer
 
