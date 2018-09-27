@@ -140,3 +140,54 @@ The required fields for `GET`, `POST`, and `DELETE` methods are by design not in
 2. Created routes for `register` and `login`. Classes so they should be uppercased.
 3. Used `Link` component from `react-router-dom` to link based on relative directories, instead of `a` tags and `href` attributes
 4. Using class component `Register.js` to deal with registration. Simple review of functions within class components
+
+## Sep 26, 2018
+1. Added axios on front end
+2. Using `axios` allows us to make a `XMLHTTPRequest` to an endpoint
+3. We can send an object with the proper key name and variables:
+```
+onSubmit(e) { ...
+  const newUser = {
+    name: 'Simon',
+    email: 'simon@simon.com',
+    password: 'fakepassword'
+  }
+
+ axios.post('/api/users/register', newUser) // 2nd param is the object 
+      .then(res => console.log(res.data)) // If successful, you can see the data from the response
+      .catch(err => console.log(err.response.data)); // You can also look at the network tab and see the response
+
+}
+```
+
+The object that is sent in the request can then be seen on the server side:
+```
+router.post('/register', (req, res) => {
+    console.log(req.body); // This shows the body of the request, which will be the object `newUser` sent from the client side
+```
+4. We installed npm `classnames` so we can have conditional classnames in react.
+- Once installed, we used the library to do the following:
+```
+render() {
+
+  const { errors } = this.state;
+
+  return (
+    <div>
+      <input 
+        type="text"
+        className={classnames('form-control form-control-lg', {
+          'is-invalid' : errors.name // classname of this exists if errors.name exists
+        })}
+        // some more attributes here...
+        />
+      {errors.name && (<div className="invalid-feedback">{errors.name}</div>)} // This div will be rendered if `errors.name` exists. The value of this comes from the server's `validation/register.js` file
+    </div>
+  )
+}
+```
+- Did this for all inputs
+- For the form, we don't want the default error states, so we added `noValidate` as an attribute in the form:
+`<form noValidate onSubmit={this.onSubmit}>`
+
+

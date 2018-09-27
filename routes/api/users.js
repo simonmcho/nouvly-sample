@@ -23,12 +23,14 @@ router.get('/test', (req, res) => {
 });
 
 /* 
-* @route    GET api/users/register
+* @route    POST api/users/register
 * @desc     Register a user
 * @access   Public
 */
 router.post('/register', (req, res) => {
-    const { errors, isValid } = validateRegisterInput(req.body); // Get error data
+    console.log(req.body);
+    const { 
+        errors, isValid } = validateRegisterInput(req.body); // Get error data
 
     if (!isValid) {
         return res.status(400).json(errors);

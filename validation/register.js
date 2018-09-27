@@ -11,35 +11,35 @@ module.exports = function validateRegisterInput(data) {
     data.passwordConfirm = !isEmpty(data.passwordConfirm) ? data.passwordConfirm : '';
 
     if (!Validator.isLength(data.name, { min: 2, max: 30})) {
-        errors.name = 'Name must be between 2 - 30 characters!';
+        errors.name = '/validate/register.js says: Name must be between 2 - 30 characters!';
     }
 
     if (Validator.isEmpty(data.name)) {
-        errors.name = 'Name field is required';
+        errors.name = '/validate/register.js says: Name field is required';
     }
 
     if (Validator.isEmpty(data.email)) {
-        errors.email = 'Email field is required';
+        errors.email = '/validate/register.js says: Email field is required';
     }
 
     if (!Validator.isEmail(data.email)) {
-        errors.email = 'Email is invalid.';
+        errors.email = '/validate/register.js says: Email is invalid.';
     }
 
     if (!Validator.isLength(data.password, { min: 6, max: 30 })) {
-        errors.password = 'Password must be between 6 - 30 characters.';
+        errors.password = '/validate/register.js says: Password must be between 6 - 30 characters.';
     }
 
     if (Validator.isEmpty(data.password)) {
-        errors.password = 'Password field is required';
+        errors.password = '/validate/register.js says: Password field is required';
     }
 
     if (!Validator.equals(data.password, data.passwordConfirm)) {
-        errors.passwordConfirm = 'Password must match!';
+        errors.passwordConfirm = '/validate/register.js says: Password must match!';
     }
 
     if (Validator.isEmpty(data.passwordConfirm)) {
-        errors.passwordConfirm = 'Name field is required';
+        errors.passwordConfirm = '/validate/register.js says: Confirm Password field is required';
     }
 
     return {
