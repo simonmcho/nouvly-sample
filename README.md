@@ -226,5 +226,21 @@ export default combineReducers({
 ```
 - Also set up `authReducer` reducer
 
-## Sep 27, 2018 - REDUX ACTIONS
-1. 
+## Sep 27, 2018 - REDUX ACTIONS, REDUCERS, STORES, WHAT?
+1. An application can be entirely wrapped by a `Provider` component, where a `store` can be a prop.
+2. The `store` contains the entire state of the application
+
+### STORE
+
+In order to create a store, `createStore` function needs to be called. It takes up to 3 params:
+`const store = createStore(rootReducer, initialState, applyMiddleware([thunk]));`
+- 1st parameter takes a `reducing function` that returns the next state tree based on the action that it receives
+    - In our example, the `reducing function` is called `rootReducer`, which is an exported `combineReducers`
+    - `combineReducers` is an object that contains many reducers combined into one object
+- 2nd parameter takes an initial state. If `reducer` is `combineReducers`, the 2nd param must be a plain object with the same shape as the keys passed to it. (I'm not sure what this means)
+- 3rd parameter is a store enhancer. It receives 3rd party capabilities like middleware. 
+
+### REDUCERS
+A reducer is a function that returns the accumulation of the state (based on all previous and current actions).
+state -> action -> state
+https://stackoverflow.com/questions/34376023/why-are-reduxs-state-functions-called-reducers

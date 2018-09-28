@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import classnames from 'classnames';
 import { connect } from  'react-redux';
@@ -54,6 +55,8 @@ class Register extends Component {
   render() {
 
     const { errors } = this.state;
+    const { user } = this.props.auth; // This is the auth property from props that comes from mapStateToProps in this file
+    // It contains the object from the authReducer
 
     return (
       <div className="register">
@@ -128,4 +131,17 @@ class Register extends Component {
   }
 }
 
-export default connect(null, { registerUser })(Register);
+Register.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+  auth: state.auth
+}); // Returning object literal
+
+export default connect(mapStateToProps, { registerUser })(Register);
+// This is a HOC
+// This is accepting 2 arguments, 1st an object, and 2nd is the authAction.
+// Then returns a component, in this case, Register, with props for the component. 
+// the object that gets the state.auth is the 1st prop, the 2nd is the registerUser action, so that is also a prop of this component
