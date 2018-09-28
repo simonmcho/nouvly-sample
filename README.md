@@ -108,7 +108,7 @@ The required fields for `GET`, `POST`, and `DELETE` methods are by design not in
 2. Ability to like and unlike a post
 3. Ability to comment on and delete a comment on a post
 
-## Sep 25, 2018
+## Sep 25, 2018 - FRONT END REACT 
 1. Created front-end using `create-react-app` cli, directory is called `client`
 2. Create proxy in `package.json` in client. We do this because we want to hit our routes via relationship, not direct http call/ajax
 - EG: `  "proxy": "http://localhost:5000"` added in `client`'s `package.json`
@@ -129,19 +129,19 @@ The required fields for `GET`, `POST`, and `DELETE` methods are by design not in
 4. To check if it's running correctly, you should see `localhost:3000` running on the browser, and typing in `http://localhost:5000/api/profile/all` should show whatever profile content is existing on the database
 5.  Added bootstrap theme in the front end as well as font-awesome CDN (`index.html` in the front end)
 
-## Sep 25, 2018B
+## Sep 25, 2018B - FRONT END REACT
 1. Installed VS Code extension `ES7 React/Redux/React-Native/JS`
 2. Created Components for `Navbar`, `Landing`, and `Footer`, added markup
 3. Installed `react-router-dom` (version 4 of `react-router`) in `client` directory
 3. Created `Router` component and `route` in `App.js`, and pointed towards `Landing` as exact route.
 
-## Sep 25, 2018C
+## Sep 25, 2018C - FRONT END REACT
 1. Creating new route and component for Register
 2. Created routes for `register` and `login`. Classes so they should be uppercased.
 3. Used `Link` component from `react-router-dom` to link based on relative directories, instead of `a` tags and `href` attributes
 4. Using class component `Register.js` to deal with registration. Simple review of functions within class components
 
-## Sep 26, 2018
+## Sep 26, 2018 - FRONT END REACT
 1. Added axios on front end
 2. Using `axios` allows us to make a `XMLHTTPRequest` to an endpoint
 3. We can send an object with the proper key name and variables:
@@ -190,7 +190,7 @@ render() {
 - For the form, we don't want the default error states, so we added `noValidate` as an attribute in the form:
 `<form noValidate onSubmit={this.onSubmit}>`
 
-## Sep 26, 2018B
+## Sep 26, 2018B - REDUX
 1. Redux
 - Think of states as also being in scopes
 - So you need an application level state
@@ -208,7 +208,7 @@ import rootReducer from './reducers';
 
 const middleware = [thunk]; // Add more middleware as you wish
 
-const store = createStore(() => [], {}, applyMiddleware(...middleware)); // spread operator allows us to bring any middleware in the variable declartion
+const store = createStore(() => [], {}, applyMiddleware(...middleware)); // spread operator allows us to bring any middleware in the variable declaration
 
 export default store;
 ```
@@ -217,6 +217,14 @@ export default store;
 export default combineReducers({
     auth: authReducer // when we use anything from authReducer in our components, we can use this.props.auth
 });
+
+- See where we are using `compose`. This is a function that composes from right to left. It is used to pass multiple store enhancers to the store
+  - Store enhancers are higher order functions that add extra functionality to the store
+    - Higher order functions take functions as params and/or return functions as return values
+    - Compose allows writing deeply nested function transformations without drifting to the right too much:
+      - EG: ` func1(func2(func3(func4(func5))))`. Using compose would be : `compose(func1, func2, func3, func4, func5)
 ```
 - Also set up `authReducer` reducer
 
+## Sep 27, 2018 - REDUX ACTIONS
+1. 
