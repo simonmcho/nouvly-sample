@@ -244,3 +244,38 @@ In order to create a store, `createStore` function needs to be called. It takes 
 A reducer is a function that returns the accumulation of the state (based on all previous and current actions).
 state -> action -> state
 https://stackoverflow.com/questions/34376023/why-are-reduxs-state-functions-called-reducers
+- Reducers specify how the application's state changes in respose to actions that are sent to the store
+- The reducer "communicates" with the store. The store state's keys are based on what is defined in your reducers.
+EG:
+```
+// Reducer
+export default (state = initialState, action) {
+  switch (action.type) {
+    case "TEST":
+      return {
+        user: action.userData, 
+        isValidated: true
+      }
+  }
+}
+
+// Once the reducer receives the action and reduces the data to a single new state to return, 
+// the app state will have the `user` key and `isValidated` key
+```
+
+### ACTIONS
+- Actions are payloads of information that send data from the application to the store.
+- Actions are the only source of information for the store.
+- In `redux`, the `store.dispatch()` will send the info to the store.
+- In `react` the `connect` functionality will do this as long as your 2nd param is provided with a list of actions.
+- Action objects must have a `type` property, and typically provide more information such as `payload`
+
+EG:
+```
+export const registerUser = userData => {
+    return {
+        type: 'SET_DATA',
+        payload: userData
+    };
+};
+```

@@ -1,10 +1,26 @@
-import { TEST_DISPATCH } from './types';
+import axios from 'axios';
+import { TEST_DISPATCH, GET_ERRORS } from './types';
 
 // Register
-export const registerUser = userData => {
-    console.log("REGISTER USER ACTION CALLED")
-    return {
-        type: TEST_DISPATCH,
-        payload: userData
-    };
+export const registerUser = (userData, history) => dispatch => {
+    console.log(history);
+    // Register user
+    axios.post('/api/users/register', userData)
+        .then(res => {
+            //console.log(res.data); // this should be userData, the 2nd param in axios.post
+            history.push('/login');
+        })
+        .catch(err => {
+            const errors = err.response.data;
+            
+            dispatch({ // dispatch sends this information to the store
+                type: GET_ERRORS,
+                payload: errors     
+            });
+
+        });
+    // return { // If no async 
+    //     type: TEST_DISPATCH, //action.type
+    //     payload: userData // action.userData
+    // };
 };

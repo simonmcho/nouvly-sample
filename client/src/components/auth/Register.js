@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 import { connect } from  'react-redux';
 import { registerUser } from '../../actions/authActions';
@@ -36,27 +36,21 @@ class Register extends Component {
       password,
       passwordConfirm
     }
-    console.log("CALLING REGISTER USER FROM Register.js CLASS COMPONENT")
-    this.props.registerUser(newUser);
 
-    // Register user
-    // axios.post('/api/users/register', newUser)
-    //   .then(res => console.log(res.data))
-    //   .catch(err => {
-    //     const errors = err.response.data;
-    //     //console.log(errors)
-    //     this.setState({
-    //       errors
-    //     });
-    //   });
+    this.props.registerUser(newUser, this.props.history);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
   }
   
 
   render() {
 
     const { errors } = this.state;
-    const { user } = this.props.auth; // This is the auth property from props that comes from mapStateToProps in this file
-    // It contains the object from the authReducer
+    //const { user } = this.props.auth; // This is the auth property from props that comes from mapStateToProps in this file
 
     return (
       <div className="register">
@@ -90,7 +84,7 @@ class Register extends Component {
                     value={this.state.email}
                     onChange={this.onChange}
                   />
-                  {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
+                  {errors.email && (<div className="invalid-feedback">{errors.email}</div>)}
                   <small className="form-text text-muted">This site uses Gravatar so if you want a profile image, use a Gravatar email</small>
                 </div>
                 <div className="form-group">
@@ -133,14 +127,17 @@ class Register extends Component {
 
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  errors: state.errors
 }); // Returning object literal
 
-export default connect(mapStateToProps, { registerUser })(Register);
+
+export default connect(mapStateToProps, { registerUser })(withRouter(Register));
 // This is a HOC
 // This is accepting 2 arguments, 1st an object, and 2nd is the authAction.
 // Then returns a component, in this case, Register, with props for the component. 

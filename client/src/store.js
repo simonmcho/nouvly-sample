@@ -16,6 +16,5 @@ const store = createStore(
 );
 //const store = createStore(rootReducer, initialState, applyMiddleware(...middleware)); // spread operator allows us to bring any middleware in the variable declartion
 //const store = createStore(() => [], {}, applyMiddleware(...middleware));
-console.log("BELOW IS THE STORE!!!!")
-console.log(store);
+
 export default store;

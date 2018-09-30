@@ -7,10 +7,6 @@ const initialState = {
 }
 
 export default (state = initialState, action) => {
-    console.log("AUTH REDUCER CALLED");
-    console.log("THE AUTH REDUCER CURRENT STATE IS " + state);
-    console.log("AND THE ACTION IS");
-    console.log(action);
     switch (action.type) {
         case TEST_DISPATCH:
             return {
