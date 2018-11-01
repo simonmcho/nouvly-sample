@@ -3,7 +3,7 @@
 - Run `npm install` to install dependencies
 - Run `yarn server` in terminal
 - Open postman for development testing
-- Login to mlab to see database
+- Login to `mlab` to see database
 
 Continue here: [Udemy](https://www.udemy.com/mern-stack-front-to-back/learn/v4/t/lecture/10055158?start=0)    
 

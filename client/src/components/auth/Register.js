@@ -132,7 +132,7 @@ Register.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth,
+  auth: state.auth, // comes from root reducer. accessible by this.props.auth
   errors: state.errors
 }); // Returning object literal
 
