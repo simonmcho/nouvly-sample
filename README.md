@@ -316,7 +316,7 @@ Example of action returning a function:
   }
 }
 ```
-7a. dispatch is a method from store that is available to the component
+7. a) dispatch is a method from store that is available to the component
 8. Once store's dispatch is called with an action passed, it will go through the `reducer`
 9. The `reducer` determines what type of new object to return, based on the `action.type`
 10. The store receives a new object, thereby changing the state of the store.
