@@ -321,3 +321,16 @@ Example of action returning a function:
 9. The `reducer` determines what type of new object to return, based on the `action.type`
 10. The store receives a new object, thereby changing the state of the store.
 11. Because it received a new object rather than a modified existing state, it has a history of all previous states that are accessible.
+
+## Nov 1, 2018 - Using Redux to figure out login/logout states
+1. Using `react-redux` and lifecycle methods, we have full control on determining what to render on to the page.
+2. When registering, it deals with errors via lifecycle method, and deals with submission by calling the `registerUser` action passed in via prop
+3. With Login, it checks to see if the user is already logged in. If it is, it pushes history to `/dashboard`
+4. If not logged in, it renders a the `Login` component, which then allows dealing with render states
+5. To stay logged in during the session, look at `App.js`. 
+6. Because we are storing the logged in token into `localStorage`, at the `App.js` level, we can call our utils method `setAuthToken` to evaluate the token and set the default authentication header value to the token passed in to stay logged in.
+7. We also added logic to check for expired token to logout the user.
+
+Recommended to check out the different actions in `authActions.js` which includes the logic in determining whether the user is logged in or out
+
+### TO DO: REVIEW the actions and reducers for auth.

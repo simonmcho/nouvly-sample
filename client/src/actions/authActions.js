@@ -35,7 +35,7 @@ export const loginUser = userData => dispatch => {
 
             const decoded = jwt_decode(token); // Decode token to get user data
 
-            dispatch(setCurrentUser(decoded));
+            dispatch(setCurrentUser(decoded)); // decoded is the User object. 
         })
         .catch(err => dispatch({
             type: GET_ERRORS,
@@ -47,6 +47,16 @@ export const loginUser = userData => dispatch => {
 export const setCurrentUser = decoded => {
     return {
         type: SET_CURRENT_USER,
-        payload: decoded
+        payload: decoded // payload is set to the passed in object. The reducer will look at this to set isAuthenticated and User properties of store accordingly
     }
+}
+
+// Log user out
+export const logoutUser = () => dispatch => {
+    // Remove token from localStorage
+    localStorage.removeItem('jwtToken');
+    // Remove auth header for future requests
+    setAuthToken(false);
+    // Sert current user to {} which will set isAuthenitcated to false
+    dispatch(setCurrentUser({}));
 }

@@ -24,15 +24,24 @@ class Login extends Component {
     })
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //}
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.auth.isAuthenticated) { // Is this needed with componentDidMount? Todo: Check and refactor this class
       this.props.history.push('/dashboard');
     }
 
-    if (nextProps.errors) {
+    if (prevProps.errors !== this.props.errors) { // Check prevProps error object vs current props error object
       this.setState({
-        errors: nextProps.errors
+        errors: this.props.errors
       });
+    }
+  }
+
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push('/dashboard');
     }
   }
 
@@ -40,19 +49,18 @@ class Login extends Component {
     e.preventDefault();
     const { email, password } = this.state;
 
-    const user = {
+    const userData = {
       email,
       password
     }
 
-    console.log(user);
-
-    // Register user
-    this.props.loginUser(user);
+    // Register userData
+    this.props.loginUser(userData);
   }
 
   render() {
     const { email, password, errors } = this.state;
+
     
     return (
       <div className="login">

@@ -40,9 +40,17 @@ class Register extends Component {
     this.props.registerUser(newUser, this.props.history);
   }
 
+  // This lifecycle method is deprecated. Look at other lifecycle methods to deal with errors coming in from the store and comparing against current errors
   componentWillReceiveProps(nextProps) { // So we can use this component's state errors
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
+    }
+  }
+
+  componentDidMount() {
+    console.log(this.props.auth.isAuthenticated);
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push('/dashboard');
     }
   }
 
