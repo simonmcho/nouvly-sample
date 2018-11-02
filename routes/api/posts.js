@@ -136,8 +136,6 @@ router.delete('/unlike/:id', passport.authenticate('jwt', { session: false }), (
             const removeIndex = post.likes
                 .map(item => item.user.toString())
                 .indexOf(req.user.id);
-            
-            console.log(removeIndex);
 
             post.likes.splice(removeIndex, 1);
             
@@ -182,7 +180,7 @@ router.post('/comment/:id', passport.authenticate('jwt', { session: false}), (re
 * @access   Private
 */
 router.delete('/comment/:id/:comment_id', passport.authenticate('jwt', { session: false }), (req, res) => {
-    console.log(req.params)
+    
     Post.findById(req.params.id)
         .then(post => {
             // Check to see if comment exists

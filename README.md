@@ -1,11 +1,15 @@
 * This is NOUVLY, a web application created by simmonson
+
+# Purpose of this Application
+- To create a MERN stack application
+- To provide guidance and principles for MERN
+- To create a front-end application using `react-redux`
+
 # How to get started
 - Run `npm install` to install dependencies
 - Run `yarn server` in terminal
 - Open postman for development testing
 - Login to `mlab` to see database
-
-Continue here: [Udemy](https://www.udemy.com/mern-stack-front-to-back/learn/v4/t/lecture/10055158?start=0)    
 
 ## Aug 6, 2018
 ### User login, authorization, and validation
@@ -262,6 +266,10 @@ export default (state = initialState, action) {
 // Once the reducer receives the action and reduces the data to a single new state to return, 
 // the app state will have the `user` key and `isValidated` key
 ```
+- The reducer gets passed in the store. The reducer receives a state and action.
+- Depending on the action type, it will create a new store object with updated values (immutability)
+- It will return the new store object
+
 
 ### ACTIONS
 - Actions are payloads of information that send data from the application to the store.
@@ -279,3 +287,37 @@ export const registerUser = userData => {
     };
 };
 ```
+- Using `thunk` middleware allows action creators to define actions that return a function instead of an object. 
+- This gives the dev control over how and when an action can be dispatched
+
+### Overall, Redux in React is:
+1. Create store. Pass in `rootReducer`, `initialState` and any middleware
+2. Your application will be wrapped in a `Provider` with a prop of `store`
+3. Your smart child components will be able to communicate with the store via `connect`, which is an HOC
+4. Using `connect` allows the component to have access to the store's state and receive them as props
+5. Actions can be passed down as props to the component as `connect`'s 2nd argument
+6. `connect` will return a component that it receives, which is the component that calls `connect`
+7. Using `thunk` allows action creators to return a function instead of an action object:
+```
+Example of action object:
+return {
+  type: 'SET_USER',
+  payload: userData // passed down by function argument, usually
+}
+
+Example of action returning a function:
+(userData) => {
+  return dispatch => {
+    setTimeout(() => {
+      dispatch({
+
+      })
+    }, 1000);
+  }
+}
+```
+7a. dispatch is a method from store that is available to the component
+8. Once store's dispatch is called with an action passed, it will go through the `reducer`
+9. The `reducer` determines what type of new object to return, based on the `action.type`
+10. The store receives a new object, thereby changing the state of the store.
+11. Because it received a new object rather than a modified existing state, it has a history of all previous states that are accessible.
