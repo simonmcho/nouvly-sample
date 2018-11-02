@@ -40,12 +40,11 @@ class Register extends Component {
     this.props.registerUser(newUser, this.props.history);
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps) { // So we can use this component's state errors
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
   }
-  
 
   render() {
 
@@ -131,10 +130,10 @@ Register.propTypes = {
   auth: PropTypes.object.isRequired
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => ({ // state is the store state
   auth: state.auth, // comes from root reducer. accessible by this.props.auth
   errors: state.errors
-}); // Returning object literal
+});
 
 
 export default connect(mapStateToProps, { registerUser })(withRouter(Register));
