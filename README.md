@@ -333,4 +333,7 @@ Example of action returning a function:
 
 Recommended to check out the different actions in `authActions.js` which includes the logic in determining whether the user is logged in or out
 
-### TO DO: REVIEW the actions and reducers for auth.
+## Nov 5, 2018 - Refactoring Form Inputs
+1. Created `TextFieldGroup` Component to avoid repetitive code
+2. Easy to pass in different props that this component can receive to dynamically render input elements with various attribute values
+3. Looked into accessing `history` object without `Route` component. However, even if `history` is accessible, in the `authActions`, pushing to a specific endpoint does not render the component. (Eg. Login component is not re-rendered even though `history.push('/login')` is executed)
