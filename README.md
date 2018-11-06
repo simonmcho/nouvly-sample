@@ -1,5 +1,7 @@
 # This is NOUVLY, a web application created by simmonson
 
+The purpose of this is to create a fun application where I document my work along the way, to help other developers who want to learn web development.
+
 # Pre-requisites
 - JavaScript ES6+
 - Express Middleware for NodeJS
