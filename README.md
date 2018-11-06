@@ -1,4 +1,10 @@
-* This is NOUVLY, a web application created by simmonson
+# This is NOUVLY, a web application created by simmonson
+
+# Pre-requisites
+- JavaScript ES6+
+- Express Middleware for NodeJS
+- Some experience in ReactJS or ReactNative. Flux pattern a bonus, as we are using Redux. Potentially refactoring to use `context`
+- NoSQL basics
 
 # How to get started
 - Run `npm install` to install dependencies
