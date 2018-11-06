@@ -1,10 +1,5 @@
 * This is NOUVLY, a web application created by simmonson
 
-# Purpose of this Application
-- To create a MERN stack application
-- To provide guidance and principles for MERN
-- To create a front-end application using `react-redux`
-
 # How to get started
 - Run `npm install` to install dependencies
 - Run `yarn server` in terminal
