@@ -98,32 +98,6 @@ class Register extends Component {
                   onChange={this.onChange}
                   error={errors.passwordConfirm}
                 />
-                {/* <div className="form-group">
-                  <input 
-                    type="password" 
-                    className={classnames('form-control form-control-lg', {
-                      'is-invalid' : errors.password
-                    })}
-                    placeholder="Password"
-                    name="password" 
-                    value={this.state.password}   
-                    onChange={this.onChange}
-                  />
-                  {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
-                </div> */}
-                {/* <div className="form-group">
-                  <input 
-                    type="password" 
-                    className={classnames('form-control form-control-lg', {
-                      'is-invalid' : errors.passwordConfirm
-                    })}
-                    placeholder="Confirm Password" 
-                    name="passwordConfirm"
-                    value={this.state.passwordConfirm} 
-                    onChange={this.onChange}
-                  />
-                  {errors.passwordConfirm && (<div className="invalid-feedback">{errors.passwordConfirm}</div>)}
-                </div> */}
                 <input 
                   type="submit" 
                   className="btn btn-info btn-block mt-4" />

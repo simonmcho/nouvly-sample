@@ -14,6 +14,11 @@ The purpose of this is to create a fun application where I document my work alon
 - Open postman for development testing
 - Login to `mlab` to see database
 
+## Resources
+- https://reacttraining.com/react-router/web/api/withRouter
+- https://www.udemy.com/mern-stack-front-to-back/learn/v4/content
+
+
 ## Aug 6, 2018
 ### User login, authorization, and validation
 Prerequisites:
