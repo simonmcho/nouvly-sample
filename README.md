@@ -314,10 +314,10 @@ return {
 }
 
 Example of action returning a function:
-(userData) => {
-  return dispatch => {
+const registerUser = (userData) => { // registerUser is action creator
+  return dispatch => { // Returns anon functions with dispatch as param
     setTimeout(() => {
-      dispatch({
+      dispatch({ // can call dispatch
 
       })
     }, 1000);

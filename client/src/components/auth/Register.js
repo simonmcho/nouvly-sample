@@ -54,7 +54,7 @@ class Register extends Component {
   }
 
   render() {
-
+    
     const { name, email, password, passwordConfirm, errors } = this.state;
     //const { user } = this.props.auth; // This is the auth property from props that comes from mapStateToProps in this file
 
