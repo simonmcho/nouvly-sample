@@ -9,16 +9,15 @@ export const getCurrentProfile = () => dispatch => {
 
     axios.get('/api/profile')
         .then(res => 
-            console.log(res.data)
-            // dispatch({
-            //     type: GET_PROFILE,
-            //     payload: res.data
-            // })
-        )
-        .catch(err => 
             dispatch({
                 type: GET_PROFILE,
-                payload: {}
+                payload: res.data
+            })
+        )
+        .catch(err => 
+            dispatch({ 
+                type: GET_PROFILE,
+                payload: {} // Payload will be empty if profile does not exist in the db
             })    
         )
 }

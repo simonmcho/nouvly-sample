@@ -24,9 +24,7 @@ class Login extends Component {
     })
   }
 
-  // static getDerivedStateFromProps(nextProps, prevState) {
-  //}
-
+  // On login, if authenticated, forward user to /dashboard
   componentDidUpdate(prevProps, prevState) {
     if (this.props.auth.isAuthenticated) { // Is this needed with componentDidMount? Todo: Check and refactor this class
       this.props.history.push('/dashboard');
