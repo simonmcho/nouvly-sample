@@ -51,7 +51,7 @@ class Login extends Component {
       email,
       password
     }
-
+    
     // Register userData
     this.props.loginUser(userData);
   }
@@ -104,7 +104,8 @@ Login.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
+  status: state
 });
 
 export default connect(mapStateToProps, { loginUser })(Login);

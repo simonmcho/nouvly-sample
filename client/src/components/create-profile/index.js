@@ -56,8 +56,6 @@ class CreateProfile extends Component {
     onSubmit(e) {
         e.preventDefault();
 
-        console.log("SUBVMITTT!!!")
-
         const profileData = {
             handle: this.state.handle,
             company: this.state.company,
@@ -81,7 +79,57 @@ class CreateProfile extends Component {
 
         console.log(this.props)
 
-        const { errors } = this.state;
+        const { errors, displaySocialInputs } = this.state;
+
+        let socialInputs;
+
+        if (displaySocialInputs) {
+            socialInputs = (
+                <div>
+                    <InputGroup
+                        placeholder="Twitter Profile URL"
+                        name="twitter"
+                        icon="fab fa-twitter"
+                        value={this.state.twitter}
+                        onChange={this.onChange}
+                        error={errors.twitter}
+                    />
+                    <InputGroup
+                        placeholder="Facebook Profile URL"
+                        name="facebook"
+                        icon="fab fa-facebook"
+                        value={this.state.facebook}
+                        onChange={this.onChange}
+                        error={errors.facebook}
+                    />
+                     <InputGroup
+                        placeholder="LinkedIn Profile URL"
+                        name="linkedin"
+                        icon="fab fa-linkedin"
+                        value={this.state.linkedin}
+                        onChange={this.onChange}
+                        error={errors.linkedin}
+                    />
+                    <InputGroup
+                        placeholder="Youtube Profile URL"
+                        name="youtube"
+                        icon="fab fa-youtube"
+                        value={this.state.youtube}
+                        onChange={this.onChange}
+                        error={errors.youtube}
+                    />
+                    <InputGroup
+                        placeholder="Instagram Profile URL"
+                        name="instagram"
+                        icon="fab fa-instagram"
+                        value={this.state.instagram}
+                        onChange={this.onChange}
+                        error={errors.instagram}
+                    />
+                </div>
+            )
+
+        }
         
         // Select options for status
         const options = [
@@ -185,8 +233,9 @@ class CreateProfile extends Component {
                                 />
                                 <div className="mb-3">
                                     <button 
+                                        type="button"
                                         className="btn btn-light"
-                                        onClick={() => { // Toggle display inputs
+                                        onClick={e => { // Toggle display inputs
                                             this.setState(prevState => ({
                                                 displaySocialInputs: !prevState.displaySocialInputs
                                             }))
@@ -194,7 +243,9 @@ class CreateProfile extends Component {
                                     >
                                         Add Social Network Links
                                     </button>
-                                    <span className="text-muted">Optional</span>
+                                    <span className="text-muted" style={{ 'margin-left': '20px' }}>Optional</span>
+                                    {socialInputs}
+                                    <input type="submit" value="Submit" className="btn btn-info btn-block mt-4" />
                                 </div>
                             </form>
                         </div>
