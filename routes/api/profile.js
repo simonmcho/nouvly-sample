@@ -316,11 +316,10 @@ router.delete('/education/:education_id', passport.authenticate('jwt', { session
 router.delete('/', passport.authenticate('jwt', { session: false }), (req, res) => {
     Profile
         .findOneAndRemove({ user: req.user.id })
-        .then(() => res.json({ profileDeleteSuccess: true }))
         .then(() => {
-            // User
-            //     .findOneAndRemove({ _id: req.user.id })
-            //     .then(() => res.json({ succes: true }));
+            User
+                .findOneAndRemove({ _id: req.user.id })
+                .then(() => res.json({ success: true }));
         })
         .catch(err => res.status(400).json(err));
 })
