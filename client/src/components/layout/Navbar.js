@@ -9,17 +9,21 @@ class Navbar extends Component {
 
     onLogoutClick(e) {
         e.preventDefault();
-        this.props.logoutUser();
         this.props.clearProfile();
+        this.props.logoutUser();
     }
+
     render() {
         const { isAuthenticated, user } = this.props.auth;
+        console.log(this.props);
 
+        // DOM structure for logged in/logged out state
         const authLinks = (
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
                     <a href="#" onClick={this.onLogoutClick.bind(this)} className="nav-link">
-                    <img src={user.avatar} alt={user.name} style={{ width: '25px', marginRight: '5px' }}title="You must have a Gravatar connected to your email to display an image" />
+                        Logout
+                        <img src={user.avatar} alt={user.name} style={{ width: '25px', marginRight: '5px' }}title="You must have a Gravatar connected to your email to display an image" />
                     </a>
                 </li>
             </ul>

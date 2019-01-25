@@ -36,9 +36,9 @@ export const loginUser =
                 localStorage.setItem('jwtToken', token); // Set token to localStorage - Only stores strings
                 setAuthToken(token);
 
-                const decoded = jwt_decode(token); // Decode token to get user data
+                const decodedObject = jwt_decode(token); // Decode token to get user data
 
-                dispatch(setCurrentUser(decoded)); // decoded is the User object. 
+                dispatch(setCurrentUser(decodedObject)); // decodedObject is the User object. 
 
             })
             .catch(err => dispatch({
@@ -49,21 +49,21 @@ export const loginUser =
 
 // Set logged in user
 export const setCurrentUser = 
-    decoded => {
+    decodedObject => {
         return {
             type: SET_CURRENT_USER,
-            payload: decoded // payload is set to the passed in object. The reducer will look at this to set isAuthenticated and User properties of store accordingly
+            payload: decodedObject // payload is set to the passed in object. The reducer will look at this to set isAuthenticated and User properties of store accordingly
         }
     }
 
 // Log user out
-export const logoutUser = 
-    history => dispatch => {
+export const logoutUser = () =>
+    dispatch => {
         
         localStorage.removeItem('jwtToken'); // Remove token from localStorage
         setAuthToken(false); // Remove auth header for future requests
         dispatch(setCurrentUser({})); // Sert current user to {} which will set isAuthenitcated to false
 
-        history.push('/login');
+        // history.push('/login');
 
     }

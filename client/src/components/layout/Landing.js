@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 class Landing extends Component {
 
+  // This prevents user from being on landing page if logged in
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
       this.props.history.push('/dashboard');
