@@ -345,3 +345,13 @@ Recommended to check out the different actions in `authActions.js` which include
 1. Created `TextFieldGroup` Component to avoid repetitive code
 2. Easy to pass in different props that this component can receive to dynamically render input elements with various attribute values
 3. Looked into accessing `history` object without `Route` component. However, even if `history` is accessible, in the `authActions`, pushing to a specific endpoint does not render the component. (Eg. Login component is not re-rendered even though `history.push('/login')` is executed)
+
+## Jan 29, 2018 - Adding/Editing Profile, Experience, Education
+1. Created `create-profile`, `edit-profile`, and `add-credentials` directories for user profiles.
+2. These are all similar in component behavior:
+  - `onSubmit` sends data to the backend for adding it to the database
+  - `onChange` is the usual changing of the values of the component state
+  - `create-profile` and `edit-profile` components have the `componentDidMount` lifecycle method that will grab the current profile data from the backend to show the data on the front-end
+  - `componentDidUpdate` will compare `nextProps` (arg from the method) vs `this.props` (props mapped from state using `connect`). If the object properties are different (eg.`nextProps.profile.profile`), it will grab the new data and call `setState` to update the local component state's properties
+3. TODO: Refactor backend validation for valid dates. Eg. Adding `0011-14-44` as a date in the `from` or `to` input fields in `add-experience` component is valid.
+  
