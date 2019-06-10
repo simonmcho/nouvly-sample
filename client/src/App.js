@@ -12,6 +12,7 @@ import Navbar from './components/layout/Navbar.js';
 import Landing from './components/layout/Landing.js';
 import Register from './components/auth/Register.js';
 import Login from './components/auth/Login.js';
+import Dashboard from './components/Dashboard';
 import Tester from './components/tester';
 import Footer from './components/layout/Footer.js';
 
@@ -43,9 +44,10 @@ class App extends Component {
             <Navbar />
             <Route exact path="/" component={Landing} />
             <div className="container">
+              <Route exact path="/tester" component={Tester} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
-              <Route exact path="/tester" component={Tester} />
+              <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </div>
             <Footer />
           </div>

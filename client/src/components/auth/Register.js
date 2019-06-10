@@ -5,9 +5,11 @@ import TextFieldGroup from '../common/TextFieldGroup';
 import { connect } from  'react-redux';
 import { registerUser } from '../../actions/authActions';
 
+import { setAlert } from '../../actions/alert';
+
 class Register extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       name: '',
       email: '',
@@ -148,8 +150,4 @@ const mapStateToProps = state => ({ // state is the store state
 });
 
 
-export default connect(mapStateToProps, { registerUser })(withRouter(Register));
-// This is a HOC
-// This is accepting 2 arguments, 1st an object, and 2nd is the authAction.
-// Then returns a component, in this case, Register, with props for the component. 
-// the object that gets the state.auth is the 1st prop, the 2nd is the registerUser action, so that is also a prop of this component
+export default connect(mapStateToProps, { registerUser, setAlert })(withRouter(Register));
